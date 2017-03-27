@@ -20,3 +20,6 @@ project(':schedulinng') {
 
 project(':properties') {
 }
+
+project(':queue-fixed-rate') {
+}
