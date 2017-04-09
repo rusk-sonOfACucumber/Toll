@@ -1,0 +1,4 @@
+project(':simple-jsp') {
+    apply plugin: 'war'
+    apply plugin: 'jetty'
+}
