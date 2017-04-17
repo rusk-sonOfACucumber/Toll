@@ -11,7 +11,9 @@ subprojects {
 
 project(':simple-jsp') {
     apply plugin: 'war'
-    apply plugin: 'jetty'
+//    apply plugin: 'jetty'
+    apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
 
     dependencies {
         providedCompile "org.eclipse.jetty:jetty-server:$jettyVersion"
