@@ -9,7 +9,7 @@ import java.net.URL;
 /**
  * Created by jdev on 05.05.2017.
  */
-public class RestConsumer {
+public class CyclicRestConsumer {
 
     public static void main(String... args) throws IOException, InterruptedException {
         // получаем строку JSON от REST
@@ -29,10 +29,10 @@ public class RestConsumer {
                 System.out.println(response);
             } catch (IOException e) {
                 System.out.println(e.getMessage());
-
             } finally {
-                Thread.sleep(2000);
                 System.out.println("==================================================");
+                Thread.sleep(2000);
+
             }
 
         }
