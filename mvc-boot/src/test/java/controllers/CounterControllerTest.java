@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class CounterControllerTest {
     @Test
     public void greeting() throws Exception {
-        CounterController controller = new CounterController();
+        CounterController controller = new CounterController(new RestTemplate());
         String name = "test name";
         CurrentState result = controller.greeting(name);
         assertEquals("It's yours, test name!", result.getContent());
@@ -34,7 +34,7 @@ public class CounterControllerTest {
 
     @Test
     public void setCoords() throws Exception {
-        CounterController controller = new CounterController();
+        CounterController controller = new CounterController(new RestTemplate());
         Response result = controller.setCoords("lat56.4,lon34.6");
         assertEquals("ok", result.message);
         assertEquals(true, result.success);
@@ -57,5 +57,13 @@ public class CounterControllerTest {
         when(restTemplate.getForObject("http://services.groupkt.com/country/get/iso2code/RU", Country.class)).thenReturn(new Country());
         Country result = mockedController.relay();
         assertNotNull(result);
+    }
+
+    @Test
+    public void relayIntegration() throws Exception {
+        Country result = new CounterController(new RestTemplate()).relay();
+        assertNotNull(result);
+        System.out.println(result.RestResponse.result.entrySet());
+        assertEquals(result.RestResponse.result.get("alpha2_code"), "RU");
     }
 }

@@ -14,8 +14,8 @@ public class RestConsumer {
 
     public static void main(String... args) throws IOException {
         // получаем строку JSON от REST
-//        String response = IOUtils.toString(new URL("http://services.groupkt.com/country/get/iso2code/RU"), "UTF8");
-        String response = IOUtils.toString(new URL("http://localhost:8080/relay"), "UTF8");
+        String response = IOUtils.toString(new URL("http://services.groupkt.com/country/get/iso2code/RU"), "UTF8");
+//        String response = IOUtils.toString(new URL("http://localhost:8080/relay"), "UTF8");
         System.out.println(response);
 
         // преобразуем строку JSON в объект
