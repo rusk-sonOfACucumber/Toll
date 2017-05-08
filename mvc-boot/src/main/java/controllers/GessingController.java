@@ -14,7 +14,7 @@ public class GessingController {
     FortuneService fortuneService;
 
     @RequestMapping("/gess")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="Noname") String name, Model model) {
+    public String gess(@RequestParam(value="name", required=false, defaultValue="Noname") String name, Model model) {
         model.addAttribute("name", name);
         model.addAttribute("num", fortuneService.tryFortune());
         return "gessing";
