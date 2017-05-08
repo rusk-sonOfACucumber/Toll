@@ -2,13 +2,21 @@ package controllers;
 
 import jd.domain.Country;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by jdev on 08.05.2017.
- *  Юнит тестирование
+ *  Юнит тестирование + использование Mockito для relay
  */
+@RunWith(MockitoJUnitRunner.class)
 public class CounterControllerTest {
     @Test
     public void greeting() throws Exception {
@@ -36,10 +44,18 @@ public class CounterControllerTest {
         assertEquals(false, result.success);
     }
 
+    @Mock
+    RestTemplate restTemplate;
+
+    @InjectMocks
+    CounterController mockedController;
+
+
+
     @Test
     public void relay() throws Exception {
-        CounterController controller = new CounterController();
-        Country result = controller.relay();
+        when(restTemplate.getForObject("http://services.groupkt.com/country/get/iso2code/RU", Country.class)).thenReturn(new Country());
+        Country result = mockedController.relay();
+        assertNotNull(result);
     }
-
 }
