@@ -1,4 +1,4 @@
-include 'simple-jsp'
+//include 'simple-jsp'
 include 'mvc-rest-consumer'
 include 'mvc-boot'
 include 'common'
