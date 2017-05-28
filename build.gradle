@@ -34,16 +34,13 @@ project(':spring-jdbc-template') {
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.springframework.boot:spring-boot-devtools")
-//        compile project(':common')
-        testCompile("org.springframework.boot:spring-boot-starter-test")
-        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
-
+        compile("org.springframework.boot:spring-boot-starter")
+        compile("org.springframework:spring-jdbc")
+        compile("com.h2database:h2")
     }
 
     jar {
-        baseName = 'gessing-boot'
+        baseName = 'template-boot'
         version =  '0.1.0'
     }
 }
