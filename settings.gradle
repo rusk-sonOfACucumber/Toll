@@ -1,4 +1,5 @@
 //include 'simple-jsp'
-include 'mvc-rest-consumer'
-include 'mvc-boot'
-include 'common'
+include 'jdbc'
+include 'spring-jdbc-template'
+include 'spring-data-jpa'
+include 'migration'
