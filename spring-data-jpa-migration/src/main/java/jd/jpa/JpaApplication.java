@@ -83,9 +83,9 @@ public class JpaApplication implements CommandLineRunner {
 
          if (all.size() == 0) {
              log.info("NO RECORDS");
+         } else {
+             all.stream().forEach(rocket -> log.info(rocket.toString()));
          }
-
-         all.stream().forEach(rocket -> log.info(rocket.toString()));
     }
 
     private Rocket create(String model) {
