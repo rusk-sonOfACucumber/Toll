@@ -3,7 +3,6 @@ package jd.dao;
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.AUTO;
-import static javax.persistence.GenerationType.SEQUENCE;
 
 /**
  * Created by jdev on 28.05.2017.
