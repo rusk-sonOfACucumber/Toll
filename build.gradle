@@ -45,40 +45,24 @@ project(':spring-jdbc-template') {
     }
 }
 
-project(':spring-data-jpa') {
+project(':spring-data-jpa-migration') {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
 
     dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.springframework.boot:spring-boot-devtools")
-//        compile project(':common')
+        compile("org.springframework.boot:spring-boot-starter-web"){
+            exclude module: "spring-boot-starter-tomcat"
+        }
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        compile group: 'com.h2database', name: 'h2', version: '1.4.195'
         testCompile("org.springframework.boot:spring-boot-starter-test")
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
-
     }
 
     jar {
-        baseName = 'gessing-boot'
+        baseName = 'jpa-boot'
         version =  '0.1.0'
     }
 }
 
-project(':migration') {
-    apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-
-    dependencies {
-        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-        compile("org.springframework.boot:spring-boot-devtools")
-//        compile project(':common')
-        testCompile("org.springframework.boot:spring-boot-starter-test")
-        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
-
-    }
-
-    jar {
-        baseName = 'gessing-boot'
-        version =  '0.1.0'
-    }
-}

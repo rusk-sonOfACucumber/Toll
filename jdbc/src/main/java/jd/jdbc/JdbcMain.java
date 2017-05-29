@@ -11,6 +11,10 @@ public class JdbcMain {
         Class.forName("org.h2.Driver"); // подключение драйвера
         Connection connection = DriverManager.getConnection("jdbc:h2:mem:test");
         createTable(connection);
+
+        read(connection);
+
+
         create(1, "Soyuz", connection);
         create(2, "Falcon", connection);
         create(3, "Angara", connection);
@@ -57,6 +61,7 @@ public class JdbcMain {
                 "VALUES ( " + id +",'" + model +"' )";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
+
     }
 
     private static void read(Connection connection) throws SQLException {
