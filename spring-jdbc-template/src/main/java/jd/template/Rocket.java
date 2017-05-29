@@ -6,4 +6,14 @@ package jd.template;
 public class Rocket {
     int id;
     String model;
+
+    public Rocket(int id, String model) {
+        this.id = id;
+        this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return "Rocket{ id=" + id + ", model=" + model+ " }";
+    }
 }
