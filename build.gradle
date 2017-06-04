@@ -52,3 +52,7 @@ project(':mvc-boot') {
 project(':common') {
     apply plugin: 'java'
 }
+
+project(':many-console') {
+    apply plugin: 'java'
+}
