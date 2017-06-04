@@ -4,12 +4,17 @@
 public class WhereIsTheMany {
     static int account = 0;
     static int transNum = 10000;
-    static int threadNum = 200;
+    static int threadNum = 20;
 
     public static void main(String... args) throws InterruptedException {
         Runnable transaction = new Runnable() {
             @Override
             public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println(Thread.currentThread().getName());
                     for (int i = 0; i < transNum; i++) {
                         WhereIsTheMany.account++;
