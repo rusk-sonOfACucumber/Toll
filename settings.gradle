@@ -1,5 +1,2 @@
-//include 'simple-jsp'
-include 'mvc-rest-consumer'
-include 'mvc-boot'
-include 'common'
 include 'many-console'
+include 'many-boot'

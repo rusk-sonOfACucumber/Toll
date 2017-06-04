@@ -1,4 +1,4 @@
-package hello;
+package jd.many;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@ComponentScan({"hello","services","controllers"})
+@ComponentScan({"jd.many","jd.controllers"})
 public class Application {
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
