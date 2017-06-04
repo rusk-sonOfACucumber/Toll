@@ -1,0 +1,55 @@
+Index: many-console/src/main/java/WhereIsTheMany.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- many-console/src/main/java/WhereIsTheMany.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
++++ many-console/src/main/java/WhereIsTheMany.java	(revision )
+@@ -6,6 +6,8 @@
+     static int transNum = 10000;
+     static int threadNum = 20;
+ 
++    static Object lock = new Object();
++
+     public static void main(String... args) throws InterruptedException {
+         Runnable transaction = new Runnable() {
+             @Override
+@@ -17,8 +19,10 @@
+                 }
+                 System.out.println(Thread.currentThread().getName());
+                     for (int i = 0; i < transNum; i++) {
+-                        WhereIsTheMany.account++;
+-                }
++                        synchronized (lock) {
++                            WhereIsTheMany.account++;
++                        }
++                    }
+             }
+         };
+ 
+Index: many-boot/src/main/java/jd/controllers/ManyController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- many-boot/src/main/java/jd/controllers/ManyController.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
++++ many-boot/src/main/java/jd/controllers/ManyController.java	(revision )
+@@ -13,14 +13,16 @@
+ public class ManyController {
+ 
+     private static final Logger log = LoggerFactory.getLogger(ManyController.class);
+-
+     private int counter = 0;
++    Object lock = new Object();
+ 
+     @RequestMapping("/increment")
+     public State increment() {
+         log.info(Thread.currentThread().getName() + " /increment");
+         for (int i = 0; i < 1000; i++)
+-            this.counter++;
++            synchronized (lock) {
++                this.counter++;
++            }
+         return new State("ok");
+     }
+ 

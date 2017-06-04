@@ -1,0 +1,149 @@
+Index: many-console/src/main/java/WhereIsTheMany.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- many-console/src/main/java/WhereIsTheMany.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
++++ many-console/src/main/java/WhereIsTheMany.java	(revision )
+@@ -1,8 +1,10 @@
++import java.util.concurrent.atomic.AtomicInteger;
++
+ /**
+  * Created by jdev on 04.06.2017.
+  */
+ public class WhereIsTheMany {
+-    static int account = 0;
++    static AtomicInteger account = new AtomicInteger(0);
+     static int transNum = 10000;
+     static int threadNum = 20;
+ 
+@@ -17,7 +19,7 @@
+                 }
+                 System.out.println(Thread.currentThread().getName());
+                     for (int i = 0; i < transNum; i++) {
+-                        WhereIsTheMany.account++;
++                        WhereIsTheMany.account.incrementAndGet();
+                 }
+             }
+         };
+@@ -38,7 +40,7 @@
+         System.out.println("account = [" + account + "]" + " must be = [" + transNum*threadNum + "]");
+ 
+         //удивляемся если разница не равна нулю
+-        if (transNum*threadNum - account != 0)
+-            System.out.println("where is my : " + (transNum*threadNum - account) + "$ !!!!!");
++        if (transNum*threadNum - account.get() != 0)
++            System.out.println("where is my : " + (transNum*threadNum - account.get()) + "$ !!!!!");
+     }
+ }
+Index: many-boot/src/main/java/jd/controllers/ManyController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- many-boot/src/main/java/jd/controllers/ManyController.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
++++ many-boot/src/main/java/jd/controllers/ManyController.java	(revision )
+@@ -6,6 +6,8 @@
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ 
++import java.util.concurrent.atomic.AtomicInteger;
++
+ /**
+  * Created by jdev on 04.06.2017.
+  */
+@@ -14,26 +16,27 @@
+ 
+     private static final Logger log = LoggerFactory.getLogger(ManyController.class);
+ 
+-    private int counter = 0;
++    private AtomicInteger counter = new AtomicInteger(0);
+ 
+     @RequestMapping("/increment")
+     public State increment() {
+         log.info(Thread.currentThread().getName() + " /increment");
+         for (int i = 0; i < 1000; i++)
+-            this.counter++;
++            this.counter.incrementAndGet();
+         return new State("ok");
+     }
+ 
+     @RequestMapping("/get")
+     public int get() {
+         log.info(Thread.currentThread().getName() + " /get");
+-        return counter;
++        return counter.get();
+     }
+ 
+     @RequestMapping("/set")
+     public int set(@RequestParam(value = "value") int value) {
+         log.info(Thread.currentThread().getName() + " /set");
+-        return counter = value;
++        counter.set(value);
++        return counter.get();
+     }
+ 
+ }
+Index: fix_syncronized.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- fix_syncronized.patch	(revision )
++++ fix_syncronized.patch	(revision )
+@@ -0,0 +1,55 @@
++Index: many-console/src/main/java/WhereIsTheMany.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- many-console/src/main/java/WhereIsTheMany.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
+++++ many-console/src/main/java/WhereIsTheMany.java	(revision )
++@@ -6,6 +6,8 @@
++     static int transNum = 10000;
++     static int threadNum = 20;
++ 
+++    static Object lock = new Object();
+++
++     public static void main(String... args) throws InterruptedException {
++         Runnable transaction = new Runnable() {
++             @Override
++@@ -17,8 +19,10 @@
++                 }
++                 System.out.println(Thread.currentThread().getName());
++                     for (int i = 0; i < transNum; i++) {
++-                        WhereIsTheMany.account++;
++-                }
+++                        synchronized (lock) {
+++                            WhereIsTheMany.account++;
+++                        }
+++                    }
++             }
++         };
++ 
++Index: many-boot/src/main/java/jd/controllers/ManyController.java
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++--- many-boot/src/main/java/jd/controllers/ManyController.java	(revision e55cba2786262a87f465d26a3384d226b3a8373c)
+++++ many-boot/src/main/java/jd/controllers/ManyController.java	(revision )
++@@ -13,14 +13,16 @@
++ public class ManyController {
++ 
++     private static final Logger log = LoggerFactory.getLogger(ManyController.class);
++-
++     private int counter = 0;
+++    Object lock = new Object();
++ 
++     @RequestMapping("/increment")
++     public State increment() {
++         log.info(Thread.currentThread().getName() + " /increment");
++         for (int i = 0; i < 1000; i++)
++-            this.counter++;
+++            synchronized (lock) {
+++                this.counter++;
+++            }
++         return new State("ok");
++     }
++ 
