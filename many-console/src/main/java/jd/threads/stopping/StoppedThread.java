@@ -1,7 +1,7 @@
 package jd.threads.stopping;
 
 /**
- * Created by Boychenko.Ivan on 07.06.2017.
+ * Created by jdev on 07.06.2017.
  */
 public class StoppedThread extends Thread {
     public void setNeedStop(boolean needStop) {

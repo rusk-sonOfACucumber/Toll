@@ -1,7 +1,7 @@
 package jd.threads.states;
 
 /**
- * Created by Boychenko.Ivan on 07.06.2017.
+ * Created by jdev on 07.06.2017.
  */
 public class ThreadExample extends Thread{
 

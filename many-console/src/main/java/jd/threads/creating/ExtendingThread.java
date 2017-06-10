@@ -1,7 +1,7 @@
 package jd.threads.creating;
 
 /**
- * Created by Boychenko.Ivan on 07.06.2017.
+ * Created by jdev on 07.06.2017.
  */
 public class ExtendingThread extends Thread {
 

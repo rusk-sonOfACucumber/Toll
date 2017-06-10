@@ -1,8 +1,5 @@
 package jd.threads.states;
 
-import jd.threads.creating.ExtendingThread;
-import jd.threads.creating.ImplementingRunnable;
-
 /**
  * Created jdev on 07.06.2017.
  */

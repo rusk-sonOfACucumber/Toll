@@ -1,7 +1,5 @@
 package jd.threads.stopping;
 
-import jd.threads.states.ThreadExample;
-
 /**
  * Created jdev on 07.06.2017.
  */
