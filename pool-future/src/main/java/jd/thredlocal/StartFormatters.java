@@ -16,5 +16,7 @@ public class StartFormatters {
         for (int i=0; i<10; i++) {
             pool.submit(formatter);
         }
+        //иначе основной поток не завершается
+        pool.shutdown();
     }
 }
