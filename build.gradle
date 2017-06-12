@@ -52,3 +52,7 @@ project(':exchange') {
 project(':pool-future') {
     apply plugin: 'java'
 }
+
+project(':exercise') {
+    apply plugin: 'java'
+}
