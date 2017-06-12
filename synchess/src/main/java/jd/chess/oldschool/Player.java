@@ -1,7 +1,7 @@
 package jd.chess.oldschool;
 
 /**
- * Created by saturn on 12.06.2017.
+ * Created by jdev on 12.06.2017.
  */
 public class Player extends Thread {
     private final boolean isWhite;

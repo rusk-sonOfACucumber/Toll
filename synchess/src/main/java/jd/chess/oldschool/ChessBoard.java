@@ -1,7 +1,7 @@
 package jd.chess.oldschool;
 
 /**
- * Created by saturn on 12.06.2017.
+ * Created by jdev on 12.06.2017.
  */
 public class ChessBoard {
     private volatile boolean nextTurn = true; // кто сейчас должен ходить true -> Белые, false -> Черные
