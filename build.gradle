@@ -40,3 +40,7 @@ project(':many-boot') {
 project(':many-console') {
     apply plugin: 'java'
 }
+
+project(':synchess') {
+    apply plugin: 'java'
+}

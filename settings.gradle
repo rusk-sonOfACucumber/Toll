@@ -1,2 +1,3 @@
 include 'many-console'
 include 'many-boot'
+include 'synchess'
