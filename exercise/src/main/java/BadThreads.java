@@ -47,7 +47,7 @@ public class BadThreads {
             message = "Казнить";
             correctorThread.start();
             Thread.sleep(10);
-            if (message.equalsIgnoreCase("Казнить"))
+//            if (message.equalsIgnoreCase("Казнить"))
                 System.out.println(message);
         }
     }
