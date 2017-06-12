@@ -44,3 +44,11 @@ project(':many-console') {
 project(':synchess') {
     apply plugin: 'java'
 }
+
+project(':exchange') {
+    apply plugin: 'java'
+}
+
+project(':pool-future') {
+    apply plugin: 'java'
+}
