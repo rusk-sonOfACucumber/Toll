@@ -45,3 +45,10 @@ project(':tracker-core') {
     }
 }
 
+project(':server-ui') {
+    apply plugin: 'java'
+}
+
+project(':tracker-ui') {
+    apply plugin: 'java'
+}
