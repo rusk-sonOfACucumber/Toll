@@ -12,7 +12,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class PointDTOTest {
 
-    private String expected = "{\"lat\":56.0,\"lon\":74.0,\"autoId\":\"o567gfd\",\"time\":1489900897458}";
+    private String Expected = "{\"lat\":56.0,\"lon\":74.0,\"autoId\":\"o567gfd\"}";
+
     private String autoId = "o567gfd";
 
     @Test
@@ -30,8 +31,8 @@ public class PointDTOTest {
     @Test
     public void decodeDto() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        PointDTO dto = mapper.readValue(expected, PointDTO.class);
-        assertEquals(autoId, dto.getAutoId());
-        assertEquals(1489900897458L, dto.getTime());
-    }
+
+        PointDTO dto = mapper.readValue(Expected, PointDTO.class);
+        assertEquals (autoId, dto.getAutoId());
+     }
 }
