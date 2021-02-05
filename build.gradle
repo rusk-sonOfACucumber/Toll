@@ -20,3 +20,8 @@ project(':server-core') {
 project(':tracker-core') {
 }
 
+project(':server-ui') {
+}
+
+project(':tracker-ui') {
+}
